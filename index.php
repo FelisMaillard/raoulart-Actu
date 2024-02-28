@@ -51,12 +51,12 @@ $pdo = new PDO($dsn,$user,$pass);
                         
                         while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
                             echo '<div class="actu chewy-regular">
-                                    <div class="top">
+                                    <div class="top-actu">
                                         <h2>'. $resultats['titre']. '</h2>
                                         <p>'. $resultats['bio']. '</p>
                                         <p> Auteur : '. $resultats2['pseudo']. '</p>
                                     </div>
-                                    <div class="bot">
+                                    <div class="bot-actu">
                                         <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
                                         <p> Sources : '. $resultats['sources']. '</p>
                                         <a href="actu.php?id_actu='. $resultats['id_actu']. '" class="buttonShowMore">Voir plus</a>

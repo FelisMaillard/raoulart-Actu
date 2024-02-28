@@ -15,6 +15,9 @@ $pdo = new PDO($dsn,$user,$pass);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <title>Raoul's art - Actu</title>
 </head>
 <body>
@@ -32,18 +35,18 @@ $pdo = new PDO($dsn,$user,$pass);
             $temp2=$pdo->query($auteur);
             
             while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
-                echo '<div class="chewy-regular">
-                        <div class="top">
+                echo '<div class="chewy-regular panneau-blog">
+                        <div class="top-blog">
                             <h2>'. $resultats['titre']. '</h2>
                             <p>' . $resultats['bio']. '</p>
                             <p>' . $resultats['blog']. '</p>
                             <p> Auteur : '. $resultats2['pseudo']. '</p>
                         </div>
-                        <div class="bot">
+                        <div class="bot-blog">
                             <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
                             <p> Sources : '. $resultats['sources']. '</p>
                         </div>
-                        </div>';
+                    </div>';
                         }
         ?>
     </main>
