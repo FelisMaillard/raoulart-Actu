@@ -48,13 +48,17 @@ $pdo = new PDO($dsn,$user,$pass);
                         $temp=$pdo->query($sql);
                         
                         while ($resultats = $temp -> fetch()){
-                            echo '<div class="actu">
-                                    <h2>'. $resultats['titre']. '</h2>
-                                    <p>'. $resultats['bio']. '</p>
-                                    <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
-                                    <p> Sources : '. $resultats['sources']. '</p>
-                                    <a href="actu.php?id_actu='. $resultats['id_actu']. '">Voir plus</a>
-                                </div>';
+                            echo '<div class="actu chewy-regular">
+                                    <div class="top">
+                                        <h2>'. $resultats['titre']. '</h2>
+                                        <p>'. $resultats['bio']. '</p>
+                                    </div>
+                                    <div class="bot">
+                                        <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
+                                        <p> Sources : '. $resultats['sources']. '</p>
+                                        <a href="actu.php?id_actu='. $resultats['id_actu']. '" class="buttonShowMore">Voir plus</a>
+                                    </div>
+                                  </div>';
                         }
                     ?>
                 </div>
