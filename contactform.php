@@ -1,25 +1,3 @@
-<?php
-$host = '127.0.0.1';
-$db = 'raoulactu';
-$user = 'root';
-$pass = '';
-$port = 3306;
-$charset = 'utf8mb4' ;
-$ok = 0;
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
-$pdo = new PDO($dsn,$user,$pass);
-
-if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) {
-    $prenom = htmlspecialchars($_POST['prenom']);
-    $nom = htmlspecialchars($_POST['nom']);
-    $mail = htmlspecialchars($_POST['mail']);
-
-    $sql = "INSERT INTO contact (prenom, nom, mail) VALUES ('$prenom', '$nom', '$mail')";
-    $result = $pdo->query($sql);
-    $ok = 1;
-}
-?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -53,11 +31,8 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
 
         <main>
             <h2 class="contacth2 chewy-regular">Contactez-nous !</h2>
-            <?php
-                if ($ok == 1) {echo '<h2 class="good">Merci pour vos informations, nous vous contacterons bientôt !</h2>';}
-            ?>
             <div class="card contactform chewy-regular">
-                <form action="contactform.php" method="post">
+                <form action="index.php" method="post">
                     <div class="label-group">
                         <label for="prenom">Prenom : </label>
                         <input type="text" name="prenom" required/>

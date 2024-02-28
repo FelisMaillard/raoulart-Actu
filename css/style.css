@@ -251,6 +251,7 @@ body{
     text-decoration: none;
     color: black;
     transition: 0.3s;
+    margin-top: 50px;
 }
 .footer-container a:hover{
     text-decoration: underline;

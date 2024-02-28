@@ -5,9 +5,24 @@ $user = 'root';
 $pass = '';
 $port = 3306;
 $charset = 'utf8mb4' ;
+$ok = 0;
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
 $pdo = new PDO($dsn,$user,$pass);
+
+if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) {
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $mail = htmlspecialchars($_POST['mail']);
+
+    $sql = "INSERT INTO contact (prenom, nom, mail) VALUES ('$prenom', '$nom', '$mail')";
+    $result = $pdo->query($sql);
+    $ok = 1;
+
+    $prenom = "";
+    $nom = "";
+    $mail = "";
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -42,6 +57,9 @@ $pdo = new PDO($dsn,$user,$pass);
 
         <main>
             <div class="creme">
+            <?php
+                if ($ok == 1) {echo '<h2 class="good chewy-regular">Merci pour vos informations, nous vous contacterons bientôt !</h2>';}
+            ?>
                 <div class="panneau-actu">
                     <?php
                         $sql="SELECT * FROM actu ORDER BY id_actu";
