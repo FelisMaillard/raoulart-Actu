@@ -27,18 +27,21 @@ $pdo = new PDO($dsn,$user,$pass);
         <?php
             $idChoisie = $_GET['id_actu'];
             $sql="SELECT * FROM actu WHERE id_actu = $idChoisie";
+            $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur";
             $temp=$pdo->query($sql);
+            $temp2=$pdo->query($auteur);
             
-            while ($resultats = $temp -> fetch()){
-                echo '<div class="actu chewy-regular">
+            while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
+                echo '<div class="chewy-regular">
                         <div class="top">
                             <h2>'. $resultats['titre']. '</h2>
-                            <p>'. $resultats['bio']. '</p>
+                            <p>' . $resultats['bio']. '</p>
+                            <p>' . $resultats['blog']. '</p>
+                            <p> Auteur : '. $resultats2['pseudo']. '</p>
                         </div>
                         <div class="bot">
                             <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
                             <p> Sources : '. $resultats['sources']. '</p>
-                            <a href="actu.php?id_actu='. $resultats['id_actu']. '" class="buttonShowMore">Voir plus</a>
                         </div>
                         </div>';
                         }

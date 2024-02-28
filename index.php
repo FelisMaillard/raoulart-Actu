@@ -45,13 +45,16 @@ $pdo = new PDO($dsn,$user,$pass);
                 <div class="panneau-actu">
                     <?php
                         $sql="SELECT * FROM actu ORDER BY id_actu";
+                        $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur";
                         $temp=$pdo->query($sql);
+                        $temp2=$pdo->query($auteur);
                         
-                        while ($resultats = $temp -> fetch()){
+                        while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
                             echo '<div class="actu chewy-regular">
                                     <div class="top">
                                         <h2>'. $resultats['titre']. '</h2>
                                         <p>'. $resultats['bio']. '</p>
+                                        <p> Auteur : '. $resultats2['pseudo']. '</p>
                                     </div>
                                     <div class="bot">
                                         <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
