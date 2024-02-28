@@ -224,6 +224,15 @@ body{
     text-align: center;
     color: green;
 }
+.center{
+    text-align: center;
+}
+.mentions{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
 .footer-container{
     width: auto;
     height: 400px;
@@ -248,7 +257,6 @@ body{
 .liens-footer{
     margin-top: 175px;
 }
-
 @media screen and (max-width: 800px) {
     .container-header h1{
         padding-top: 70px;
