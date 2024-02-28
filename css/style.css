@@ -69,6 +69,10 @@ body{
     grid-template-rows: 1fr 1fr;
     background-image: url(..\medias\cards.png);
     background-size: cover;
+    transition: 0.1s;
+}
+.actu:hover{
+    transform: scale(1.05);
 }
 .actu h2{
     margin: 15px 20px;
@@ -183,6 +187,43 @@ body{
     font-size: 30px;
     margin-top: 0;
 }
+.contactform{
+    margin: 100px auto;
+}
+.contacth2{
+    text-align: center;
+    margin-top: 75px;
+}
+#boutonEnvoie{
+    margin-top: 30px;
+    margin-left: 115px;
+}
+.label-group {
+    color: var(--white);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contactform input{
+    max-width: 400px;
+    margin: 0 auto;
+}
+.label-group label {
+    margin-bottom: 10px;
+}
+.label-group input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+.good{
+    text-align: center;
+    color: green;
+}
 .footer-container{
     width: auto;
     height: 400px;
@@ -193,7 +234,21 @@ body{
     border-top: 1px solid rgb(186, 207, 0);
     margin: 0 auto;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
+.footer-container a{
+    text-decoration: none;
+    color: black;
+}
+.footer-container iframe{
+    margin-top: 100px;
+    border: 1px solid linear-gradient(90deg, rgba(255,235,215,1) 0%, rgba(240,255,178,1) 20%, rgba(188,255,167,1) 40%, rgba(136,249,238,1) 60%, rgba(161,183,250,1) 80%, rgba(238,187,255,1) 100%);
+}
+.liens-footer{
+    margin-top: 175px;
+}
+
 @media screen and (max-width: 800px) {
     .container-header h1{
         padding-top: 70px;
