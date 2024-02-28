@@ -53,6 +53,9 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
 
         <main>
             <h2 class="contacth2 chewy-regular">Contactez-nous !</h2>
+            <?php
+                if ($ok == 1) {echo '<h2 class="good">Merci pour vos informations, nous vous contacterons bientôt !</h2>';}
+            ?>
             <div class="card contactform chewy-regular">
                 <form action="contactform.php" method="post">
                     <div class="label-group">
@@ -69,9 +72,6 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
                     </div>
                     <input type="submit" value="Envoyer" id="boutonEnvoie"/>
                 </form>
-                <?php
-                if ($ok == 1) {echo '<h2 class="good">Merci pour vos informations, nous vous contacterons bientôt !</h2>';}
-                ?>
             </div>
         </main>
 

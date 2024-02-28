@@ -49,7 +49,7 @@
                 <p>Raoul's Art se réserve le droit de modifier à tout moment les présentes Conditions d'Utilisation. Il vous incombe de consulter régulièrement cette page pour prendre connaissance des éventuelles modifications.</p>
 
                 <h2>6. Contact</h2>
-                <p>Pour toute question concernant les Conditions d'Utilisation, veuillez contacter Raoul's Art à l'adresse suivante : <a href="mailto:contact@raoulsart.com">contact@raoulsart.com</a>.</p>
+                <p>Pour toute question concernant les Conditions d'Utilisation, veuillez contacter Raoul's Art à l'adresse suivante : <a href="mailto:felis.maillard@agfagoofay.fr">felis.maillard@agfagoofay.fr</a>.</p>
 
                 <p>Fait à Saint-Nazaire, le 28/02/2024.</p>
             </div>

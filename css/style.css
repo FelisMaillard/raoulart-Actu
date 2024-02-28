@@ -247,15 +247,21 @@ body{
     grid-template-columns: 1fr 1fr;
 }
 .footer-container a{
+    font-size: 20px;
     text-decoration: none;
     color: black;
+    transition: 0.3s;
+}
+.footer-container a:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
 .footer-container iframe{
     margin-top: 100px;
     border: 1px solid linear-gradient(90deg, rgba(255,235,215,1) 0%, rgba(240,255,178,1) 20%, rgba(188,255,167,1) 40%, rgba(136,249,238,1) 60%, rgba(161,183,250,1) 80%, rgba(238,187,255,1) 100%);
 }
 .liens-footer{
-    margin-top: 175px;
+    margin-top: 150px;
 }
 @media screen and (max-width: 800px) {
     .container-header h1{
