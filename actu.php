@@ -30,7 +30,7 @@ $pdo = new PDO($dsn,$user,$pass);
         <?php
             $idChoisie = $_GET['id_actu'];
             $sql="SELECT * FROM actu WHERE id_actu = $idChoisie";
-            $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur";
+            $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur"; //possibilité de faire une seule requete SQL
             $temp=$pdo->query($sql);
             $temp2=$pdo->query($auteur);
             
