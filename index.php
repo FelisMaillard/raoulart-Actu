@@ -6,6 +6,7 @@ $pass = '';
 $port = 3306;
 $charset = 'utf8mb4' ;
 $ok = 0;
+$i = 0;
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
 $pdo = new PDO($dsn,$user,$pass);
@@ -67,7 +68,7 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
                         $temp=$pdo->query($sql);
                         $temp2=$pdo->query($auteur);
                         
-                        while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
+                        while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch() and $i <= 5) {
                             echo '<div class="actu chewy-regular">
                                     <div class="top-actu">
                                         <h2>'. $resultats['titre']. '</h2>
@@ -80,6 +81,7 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
                                         <a href="actu.php?id_actu='. $resultats['id_actu']. '" class="buttonShowMore">Voir plus</a>
                                     </div>
                                   </div>';
+                            $i++;
                         }
                     ?>
                 </div>
