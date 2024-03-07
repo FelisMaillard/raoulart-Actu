@@ -8,6 +8,7 @@ $charset = 'utf8mb4' ;
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
 $pdo = new PDO($dsn,$user,$pass);
+require_once('classActualite.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,22 +30,21 @@ $pdo = new PDO($dsn,$user,$pass);
     <main>
         <?php
             $idChoisie = $_GET['id_actu'];
-            $sql="SELECT * FROM actu WHERE id_actu = $idChoisie";
-            $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur";
+            $sql="SELECT * FROM actu,auteur WHERE id_actu = $idChoisie AND auteur.id_auteur = actu.auteur";
             $temp=$pdo->query($sql);
-            $temp2=$pdo->query($auteur);
             
-            while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch()){
+            while ($resultats = $temp -> fetch()){
+                $actu = new Actualite($resultats);
                 echo '<div class="chewy-regular panneau-blog">
                         <div class="top-blog">
-                            <h2>'. $resultats['titre']. '</h2>
-                            <p>' . $resultats['bio']. '</p>
-                            <p>' . $resultats['blog']. '</p>
-                            <p> Auteur : '. $resultats2['pseudo']. '</p>
+                            <h2>'. $actu->titre . '</h2>
+                            <p>' . $actu->bio . '</p>
+                            <p>' . $actu->blog . '</p>
+                            <p> Auteur : '. $actu->auteur . '</p>
                         </div>
                         <div class="bot-blog">
-                            <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
-                            <p> Sources : '. $resultats['sources']. '</p>
+                            <img src="medias/'. $actu->img . '" alt="' . $actu->alt_img . '" title ="' . $actu->alt_img .'">
+                            <p> Sources : '. $actu->sources . '</p>
                         </div>
                     </div>';
                         }

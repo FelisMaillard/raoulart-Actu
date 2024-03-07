@@ -5,25 +5,13 @@ $user = 'root';
 $pass = '';
 $port = 3306;
 $charset = 'utf8mb4' ;
-$ok = 0;
 $i = 0;
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
 $pdo = new PDO($dsn,$user,$pass);
 
-if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) {
-    $prenom = htmlspecialchars($_POST['prenom']);
-    $nom = htmlspecialchars($_POST['nom']);
-    $mail = htmlspecialchars($_POST['mail']);
-
-    $sql = "INSERT INTO contact (prenom, nom, mail) VALUES ('$prenom', '$nom', '$mail')";
-    $result = $pdo->query($sql);
-    $ok = 1;
-
-    $prenom = "";
-    $nom = "";
-    $mail = "";
-}
+require_once('classContact.php');
+require_once('classActualite.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -59,31 +47,36 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
         <main>
             <div class="creme">
             <?php
-                if ($ok == 1) {echo '<h2 class="good chewy-regular">Merci pour vos informations, nous vous contacterons bientôt !</h2>';}
+            if(isset($_GET["ok"])){if ($_GET['ok'] == 1) {
+            ?>
+            <h2 class="good chewy-regular">Merci pour vos informations, nous vous contacterons bientôt !</h2>
+            <?php
+            ;}}
             ?>
                 <div class="panneau-actu">
                     <?php
-                        $sql="SELECT * FROM actu ORDER BY id_actu";
-                        $auteur="SELECT auteur.id_auteur,auteur.pseudo, actu.auteur FROM auteur,actu WHERE auteur.id_auteur = actu.auteur";
+                        $sql="SELECT * FROM actu,auteur WHERE auteur.id_auteur = actu.auteur ORDER BY id_actu LIMIT 5";
                         $temp=$pdo->query($sql);
-                        $temp2=$pdo->query($auteur);
                         
-                        while ($resultats = $temp -> fetch() and $resultats2 = $temp2 -> fetch() and $i <= 5) {
-                            echo '<div class="actu chewy-regular">
-                                    <div class="top-actu">
-                                        <h2>'. $resultats['titre']. '</h2>
-                                        <p>'. $resultats['bio']. '</p>
-                                        <p> Auteur : '. $resultats2['pseudo']. '</p>
-                                    </div>
-                                    <div class="bot-actu">
-                                        <img src="'. $resultats['img']. '" alt="' . $resultats['alt_img'] . '" title ="' . $resultats['alt_img'] .'">
-                                        <p> Sources : '. $resultats['sources']. '</p>
-                                        <a href="actu.php?id_actu='. $resultats['id_actu']. '" class="buttonShowMore">Voir plus</a>
-                                    </div>
-                                  </div>';
-                            $i++;
+                        while ($resultats = $temp -> fetch()) {
+                            $actu = new Actualite($resultats);            
+                    ?>
+                            <div class="actu chewy-regular">
+                                <div class="top-actu">
+                                    <h2><?=$actu->titre?></h2>
+                                    <p><?=$actu->bio?></p>
+                                    <p><?=$actu->auteur?></p>
+                                </div>
+                                <div class="bot-actu">
+                                    <img src="medias/<?=$actu->img?>" alt="<?=$actu->alt_img?>" title = "<?=$actu->alt_img?>"/>
+                                    <p><?=$actu->sources?></p>
+                                    <a href="actu.php?id_actu=<?=$resultats['id_actu']?>" class="buttonShowMore">Voir plus</a>
+                                </div>
+                            </div>
+                    <?php
                         }
                     ?>
+
                 </div>
             </div>
             <div class="panneau-1">

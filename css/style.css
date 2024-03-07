@@ -221,6 +221,7 @@ body{
     margin-bottom: 10px;
 }
 .good{
+    padding-top: 20px;
     text-align: center;
     color: green;
 }

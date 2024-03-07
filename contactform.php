@@ -1,5 +1,31 @@
+<?php
+
+$host = '127.0.0.1';
+$db = 'raoulactu';
+$user = 'root';
+$pass = '';
+$port = 3306;
+$charset = 'utf8mb4' ;
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
+$pdo = new PDO($dsn,$user,$pass);
+
+require_once('classContact.php');
+
+if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) {
+    $prenom = htmlspecialchars($_POST['prenom']);
+    $nom = htmlspecialchars($_POST['nom']);
+    $mail = htmlspecialchars($_POST['mail']);
+    $contact = new Contact($nom, $prenom, $mail);
+
+    $contact->ajoutContact($contact,$pdo);
+
+    header('Location: index.php?ok=1');
+    exit();
+}
+?>
 <!doctype html>
-<html lang="en">
+<html lang="fr">
     <head>
         <title>Raoul's Art - Home</title>
         <!-- Required meta tags -->
@@ -32,7 +58,7 @@
         <main>
             <h2 class="contacth2 chewy-regular">Contactez-nous !</h2>
             <div class="card contactform chewy-regular">
-                <form action="index.php" method="post">
+                <form action="contactform.php" method="post">
                     <div class="label-group">
                         <label for="prenom">Prenom : </label>
                         <input type="text" name="prenom" required/>
