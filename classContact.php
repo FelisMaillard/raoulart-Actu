@@ -1,5 +1,6 @@
 <?php
-class Contact {
+require_once ('classSQL.php');
+class Contact extends SQL{
     public $nom;
     public $prenom;
     public $mail;
@@ -11,7 +12,7 @@ class Contact {
     }
     public static function ajoutContact($contact,$pdo){
         $sql = "INSERT INTO contact (prenom, nom, mail) VALUES ('" . $contact->prenom . "', '" . $contact->nom . "', '" . $contact->mail . "')";
-        $result = $pdo->query($sql);
+        SQL::ajouter($sql);
     }
 }
 ?>

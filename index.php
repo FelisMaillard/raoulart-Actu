@@ -1,17 +1,8 @@
 <?php
-$host = '127.0.0.1';
-$db = 'raoulactu';
-$user = 'root';
-$pass = '';
-$port = 3306;
-$charset = 'utf8mb4' ;
 $i = 0;
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
-$pdo = new PDO($dsn,$user,$pass);
-
-require_once('classContact.php');
 require_once('classActualite.php');
+require_once('classSQL.php');
+SQL::connexionBDD();
 ?>
 <!doctype html>
 <html lang="en">
@@ -55,22 +46,21 @@ require_once('classActualite.php');
             ?>
                 <div class="panneau-actu">
                     <?php
-                        $sql="SELECT * FROM actu,auteur WHERE auteur.id_auteur = actu.auteur ORDER BY id_actu LIMIT 5";
-                        $temp=$pdo->query($sql);
-                        
-                        while ($resultats = $temp -> fetch()) {
-                            $actu = new Actualite($resultats);            
+                        $resultat = Actualite::getAll();
+                        $max = count($resultat)<5?count($resultat):5;
+                        for ($index = 0; $index < $max; $index++){
+                            $actualite = new Actualite($resultat[$index]);   
                     ?>
                             <div class="actu chewy-regular">
                                 <div class="top-actu">
-                                    <h2><?=$actu->titre?></h2>
-                                    <p><?=$actu->bio?></p>
-                                    <p><?=$actu->auteur?></p>
+                                    <h2><?=$actualite->getTitre()?></h2>
+                                    <p><?=$actualite->getBio()?></p>
+                                    <p><?=$actualite->getAuteur()?></p>
                                 </div>
                                 <div class="bot-actu">
-                                    <img src="medias/<?=$actu->img?>" alt="<?=$actu->alt_img?>" title = "<?=$actu->alt_img?>"/>
-                                    <p><?=$actu->sources?></p>
-                                    <a href="actu.php?id_actu=<?=$resultats['id_actu']?>" class="buttonShowMore">Voir plus</a>
+                                    <img src="medias/<?=$actualite->getImg()?>" alt="<?=$actualite->getAltImg()?>" title = "<?=$actualite->getAltImg()?>"/>
+                                    <p><?=$actualite->getSources()?></p>
+                                    <a href="actu.php?id_actu=<?=$actualite->getId()?>" class="buttonShowMore">Voir plus</a>
                                 </div>
                             </div>
                     <?php
