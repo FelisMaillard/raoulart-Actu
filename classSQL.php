@@ -24,5 +24,16 @@ class SQL{
         $temp->execute();
         return $temp->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function suppr($sql){
+        $pdo = SQL::connexionBDD();
+        $temp = $pdo->prepare($sql);
+        $temp->execute();
+    }
+    public static function ajoutBase(array $data){
+        $pdo = SQL::connexionBDD();
+        $sql = "INSERT INTO menu(nom, categorie_id) VALUES (:nom, :categorie_id)";
+        $result = $pdo->prepare($sql);
+        $result->execute($data);
+    }
 }
 ?>
