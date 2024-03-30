@@ -1,7 +1,7 @@
 <?php
 $i = 0;
-require_once('classActualite.php');
-require_once('classSQL.php');
+require_once('classes/classActualite.php');
+require_once('classes/classSQL.php');
 SQL::connexionBDD();
 ?>
 <!doctype html>
@@ -31,7 +31,7 @@ SQL::connexionBDD();
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("includes/headerindex.php");
             ?>
         </header>
 
@@ -146,7 +146,7 @@ SQL::connexionBDD();
 
         <footer>
             <?php
-            include("includes/footer.php");
+            include("includes/footerindex.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
