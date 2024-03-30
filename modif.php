@@ -2,6 +2,9 @@
 require_once('classActualite.php');
 require_once('classSQL.php');
 SQL::connexionBDD();
+$id = $_REQUEST['id'];
+$nom = $_REQUEST['nom'];
+$categorie_id = $_REQUEST['categorie_id'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,24 +37,17 @@ SQL::connexionBDD();
             ?>
         </header>
         <main>
-            <div class="tab-admin">
-                <table border="1px">
-                <tr><th>Id</th><th>Pages</th><th>catgegorie</th><th>Modif</th></tr>
-                <?php
-                    $resultats = Menu::getMenu();  
-                    for ($i=0;$i < count($resultats);$i++) {
-                        $menu = new Menu($resultats[$i]);
-                ?>
-                    <tr><td><?= $menu->getId() ?></td><td><?= $menu->getNom() ?></td><td><?= $menu->getCategorieId() ?></td><td><a href="modif.php?id=<?=$menu->getId()?>&nom=<?=$menu->getNom()?>&categorie_id=<?=$menu->getCategorieId()?>">Modifier</a><a href="suppr.php?id=<?= $menu->getId() ?>">Remove</a></td></tr>
-                <?php
-                    }
-                ?>
-                </table>
-                <br />
-                <a href="ajout.php">Add</a>
+            <div class="conf-menu">
+                <h2>Modifier :</h2>
+                <form action="confModif">
+                    <input type="hidden" name="id" value="<?=$id?>">
+                    <label for="nom">Nom : </label>
+                    <input type="text" id="nom" name="nom" value="<?=$nom?>" required>
+                    <label for="categorie_id">Id de catégorie associé : </label>
+                    <input type="number" id="categorie_id" name="categorie_id" value="<?=$categorie_id?>" required>
+                    <input type="submit" method="POST">
+                </form>
             </div>
-
-
         </main>
         <footer>
             <?php

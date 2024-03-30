@@ -237,6 +237,9 @@ body{
 .tab-admin{
     padding: 100px;
 }
+.tab-admin a{
+    margin-right: 10px;
+}
 .conf-menu{
     padding-top: 100px;
     padding-bottom: 100px;

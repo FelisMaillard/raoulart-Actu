@@ -35,5 +35,11 @@ class SQL{
         $result = $pdo->prepare($sql);
         $result->execute($data);
     }
+    public static function modifBase(array $data){
+        $pdo = SQL::connexionBDD();
+        $sql = "UPDATE menu SET nom = :nom , categorie_id = :categorie_id WHERE id = :id";
+        $result = $pdo->prepare($sql);
+        $result->execute($data);
+    }
 }
 ?>

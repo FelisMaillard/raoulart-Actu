@@ -61,5 +61,13 @@ class Menu extends SQL{
         ];
         return SQL::ajoutBase($data);
     }
+    public static function modifMenu($id,$nom,$categorie_id){
+        $data = [
+            'id' =>$id,
+            'nom' =>$nom,
+            'categorie_id' => $categorie_id
+        ];
+        return SQL::modifBase($data);
+    }
 }
 ?>
