@@ -19,13 +19,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
 
@@ -57,7 +57,7 @@
 
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

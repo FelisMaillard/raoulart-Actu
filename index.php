@@ -8,20 +8,9 @@ SQL::connexionBDD();
 <html lang="en">
     <head>
         <title>Raoul's Art - Home</title>
-        <!-- Required meta tags -->
         <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
@@ -48,8 +37,10 @@ SQL::connexionBDD();
                     <?php
                         $resultat = Actualite::getAll();
                         $max = count($resultat)<5?count($resultat):5;
+                        $id = 0;
                         for ($index = 0; $index < $max; $index++){
-                            $actualite = new Actualite($resultat[$index]);   
+                            $actualite = new Actualite($resultat[$index]);
+                            $id++;
                     ?>
                             <div class="actu chewy-regular">
                                 <div class="top-actu">
@@ -60,7 +51,7 @@ SQL::connexionBDD();
                                 <div class="bot-actu">
                                     <img src="medias/<?=$actualite->getImg()?>" alt="<?=$actualite->getAltImg()?>" title = "<?=$actualite->getAltImg()?>"/>
                                     <p><?=$actualite->getSources()?></p>
-                                    <a href="actu.php?id_actu=<?=$actualite->getId()?>" class="buttonShowMore">Voir plus</a>
+                                    <a href="pages/actu.php?id_actu=<?=$actualite->getId()?>" class="buttonShowMore">Voir plus</a>
                                 </div>
                             </div>
                     <?php

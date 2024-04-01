@@ -21,11 +21,6 @@ class Menu extends SQL{
         return $this->nom;
     }
 
-    public function getUrl():string
-    {
-        return $this->url;
-    }
-
     public function getCategorieId()
     {
         return $this->categorie_id;
@@ -33,41 +28,37 @@ class Menu extends SQL{
 
     public static function getMenu():array{
         $sql = "SELECT * FROM menu ORDER BY id";
-        return SQL::afficher($sql);
+        return SQL::afficherBase($sql);
     }
 
     public static function getMenuByCategorie(int $categorie_id):array{
         $sql = "SELECT * FROM menu WHERE categorie_id = $categorie_id";
-        return SQL::afficher($sql);
-    }
-
-    public static function AddMenu(){
-        $sql = "INSERT INTO menu(nom, url, sousmenu) VALUES (:nom, :url, :categorie_id)";
-        $data = [
-            'nom' =>htmlentities($_POST['nom']),
-            'url' => htmlentities($_POST['url']),
-            'categorie_id' => htmlentities($_POST['categorie_id'])
-        ];
-        return SQL::ajouter($sql, $data);
+        return SQL::afficherBase($sql);
     }
     public static function supprMenu($id){
-        $sql = "DELETE FROM menu WHERE id = $id";
-        return SQL::suppr($sql);
+        $sql = "DELETE FROM menu WHERE id = :id";
+        $data = [
+            'id' =>$id
+        ];
+        return SQL::modifBase($data,$sql);
     }
+
     public static function ajoutMenu($nom,$id){
+        $sql = "INSERT INTO menu(nom, categorie_id) VALUES (:nom, :categorie_id)";
         $data = [
             'nom' =>$nom,
             'categorie_id' => $id
         ];
-        return SQL::ajoutBase($data);
+        return SQL::modifBase($data,$sql);
     }
     public static function modifMenu($id,$nom,$categorie_id){
+        $sql = "UPDATE menu SET nom = :nom , categorie_id = :categorie_id WHERE id = :id";
         $data = [
             'id' =>$id,
             'nom' =>$nom,
             'categorie_id' => $categorie_id
         ];
-        return SQL::modifBase($data);
+        return SQL::modifBase($data,$sql);
     }
 }
 ?>

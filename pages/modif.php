@@ -1,10 +1,21 @@
 <?php
-require_once('classActualite.php');
-require_once('classSQL.php');
+require_once('../classes/classActualite.php');
+require_once('../classes/classSQL.php');
 SQL::connexionBDD();
-$id = $_REQUEST['id'];
-$nom = $_REQUEST['nom'];
-$categorie_id = $_REQUEST['categorie_id'];
+if (isset($_GET['actu'])) {
+    if ($_GET['actu'] == 1) {
+        $id = $_GET['id'];
+        $titre = $_GET['titre'];
+        $bio = $_GET['bio'];
+        $blog = $_GET['blog'];
+        $date_modif = $_GET['date_modif'];
+    }}
+if (isset($_GET['menu'])) {
+    if ($_GET['menu'] == 1) {
+        $id = $_REQUEST['id'];
+        $nom = $_REQUEST['nom'];
+        $categorie_id = $_REQUEST['categorie_id'];
+    }}
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,31 +38,59 @@ $categorie_id = $_REQUEST['categorie_id'];
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
         <main>
             <div class="conf-menu">
+                <?php
+                if (isset($_GET['menu'])) {
+                    if ($_GET['menu'] == 1) {
+                ?>
                 <h2>Modifier :</h2>
                 <form action="confModif">
                     <input type="hidden" name="id" value="<?=$id?>">
+                    <input type="hidden" name="menu" value="1">
                     <label for="nom">Nom : </label>
                     <input type="text" id="nom" name="nom" value="<?=$nom?>" required>
                     <label for="categorie_id">Id de catégorie associé : </label>
                     <input type="number" id="categorie_id" name="categorie_id" value="<?=$categorie_id?>" required>
                     <input type="submit" method="POST">
                 </form>
+                <?php
+                    }}
+                if (isset($_GET['actu'])) {
+                    if ($_GET['actu'] == 1) {
+                ?>
+                <h2>Modifier :</h2>
+                <form action="confModif">
+                    <input type="hidden" name="id" value="<?=$id?>">
+                    <input type="hidden" name="actu" value="1">
+                    <label for="titre">Titre : </label>
+                    <input type="text" id="titre" name="titre" value="<?=$titre?>" required>
+                    <label for="bio">Bio : </label>
+                    <input type="text" id="bio" name="bio" value="<?=$bio?>" required>
+                    <label for="blog">Blog : </label>
+                    <input type="text" id="blog" name="blog" value="<?=$blog?>" required>
+                    <label for="date_modif">Date de modification : </label>
+                    <input type="date" id="date_modif" name="date_modif" value="<?=$date_modif?>" required>
+                    <input type="submit" method="POST">
+                </form>
+                <?php
+                    }}
+                ?>
+
             </div>
         </main>
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

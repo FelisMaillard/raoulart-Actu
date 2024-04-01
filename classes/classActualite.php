@@ -27,32 +27,56 @@ class Actualite extends SQL {
         $this->img=$values['img'];
         $this->alt_img=$values['alt_img'];
     }
-    public static function afficherArticle($values)
-    {
-        $actualite = [];
-        $actu = new Actualite($values);
-        $sql="SELECT * FROM actu,auteur WHERE auteur.id_auteur = actu.auteur ORDER BY id_actu LIMIT 5";
-        $temp = SQL::afficher($sql);
-        while ($resultats = $temp -> fetch()) {
-            array_push($actualite,new Actualite($resultats));          
-        }
-        return $actualite;
-    }
     public static function getAll() {
-        $sql = 'SELECT * FROM actu ORDER BY date_modif DESC LIMIT 5';
-        return SQL::afficher($sql);
-    }
-
-    public static function getArticleAuteur(int $id){
-        $sql = 'SELECT auteur.nom, auteur.prenom FROM auteur, actu WHERE auteur.id_auteur = actu.id_auteur AND actu.id_actu = '.$id.' ';
-        return SQL::afficher($sql);
+        $sql = 'SELECT * FROM actu ORDER BY date_modif';
+        return SQL::afficherBase($sql);
     }
 
     public static function getArticle(int $id){
-        $sql = 'SELECT * FROM actu WHERE id_actu = '.$id.' ';
-        return SQL::afficher($sql);
+        $sql = 'SELECT * FROM actu WHERE id_actu = '.$id;
+        return SQL::afficherBase($sql);
     }
-    public function getId():string
+
+    public static function getArticleAuteur(int $id){
+        $sql = 'SELECT auteur.pseudo FROM auteur, actu WHERE actu.auteur = auteur.id_auteur AND actu.id_actu = '.$id;
+        $result = SQL::afficherBase($sql);
+        return $result[0]['pseudo'];
+    }
+    public static function updateActu(int $id, string $titre, string $bio, string $blog, $date_modif){
+        $sql = "UPDATE actu SET titre = :titre, bio = :bio, blog = :blog, date_modif = :date_modif WHERE id_actu = :id";
+        $data = [
+            'id_actu' => $id,
+            'titre' => $titre,
+            'bio' => $bio,
+            'blog' => $blog,
+            'date_modif' => $date_modif
+        ];
+        return SQL::modifBase($data, $sql);
+    }
+    public static function supprActu(int $id){
+        $sql = "DELETE FROM actu WHERE id_actu = :id_actu";
+        $data = [
+            'id_actu' => $id
+        ];
+        return SQL::modifBase($data, $sql);
+    }
+    public static function ajoutActu(string $titre, string $bio, string $blog, $date_publi, $date_modif, $auteur, string $tags, string $sources, string $img, string $alt_img){
+        $sql = "INSERT INTO actu (titre, bio, blog, date_publi, date_modif, auteur, tags, sources, img, alt_img) VALUES (:titre, :bio, :blog, :date_publi, :date_modif, :auteur, :tags, :sources, :img, :alt_img)";
+        $data = [
+            'titre' => $titre,
+            'bio' => $bio,
+            'blog' => $blog,
+            'date_publi' => $date_publi,
+            'date_modif' => $date_modif,
+            'auteur' => $auteur,
+            'tags' => $tags,
+           'sources' => $sources,
+            'img' => $img,
+            'alt_img' => $alt_img
+        ];
+        return SQL::modifBase($data, $sql);
+    }
+        public function getId():string
     {
         return $this->id_actu;
     }
@@ -68,12 +92,8 @@ class Actualite extends SQL {
     {
         return $this->blog;
     }
-    public function getAuteur():string
-    {
+    public function getAuteur(){
         return $this->auteur;
-        // $sql='SELECT auteur.pseudo FROM actu,auteur WHERE actu.auteur = auteur.id_auteur';
-        // $temp=query()->sql;
-        // return $temp;
     }
     public function getDatePubli():string
     {

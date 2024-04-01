@@ -1,8 +1,9 @@
 <?php
-require_once('classActualite.php');
-require_once('classSQL.php');
+require_once('../classes/classActualite.php');
+require_once('../classes/classContact.php');
+require_once('../classes/classMenu.php');
+require_once('../classes/classSQL.php');
 SQL::connexionBDD();
-$id=$_REQUEST['id']
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,25 +26,47 @@ $id=$_REQUEST['id']
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
         <main>
-            <div class="conf-menu">
-                <h2>Voulez-vous vraiment supprimer ce menu ? :</h2>
-                <a href="conf.php?id=<?=$id?>">Oui</a>
+            <?php
+            if (isset($_GET['contact'])) {
+                if($_GET['contact']==1){
+                echo '<div class="conf-menu">
+                <h2>Voulez-vous vraiment supprimer ce contact ? :</h2>
+                <a href="conf.php?mail=' . $_GET['mail'] . '&contact=1">Oui</a>
                 <a href="administration.php">Non</a>
-            </div>
+                </div>';
+            }}
+            if (isset($_GET['menu'])) {
+                if($_GET['menu']==1){
+                echo '<div class="conf-menu">
+                <h2>Voulez-vous vraiment supprimer ce menu ? :</h2>
+                <a href="conf.php?id='. $_GET['id'] . '&menu=1">Oui</a>
+                <a href="administration.php">Non</a>
+                </div>';
+            }}
+            if (isset($_GET['actu'])) {
+                if($_GET['actu']==1){
+                echo '<div class="conf-menu">
+                <h2>Voulez-vous vraiment supprimer cette ? :</h2>
+                <a href="conf.php?id='. $_GET['id'] . '&actu=1">Oui</a>
+                <a href="administration.php">Non</a>
+                </div>';
+            }}
+            ?>
+            
         </main>
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

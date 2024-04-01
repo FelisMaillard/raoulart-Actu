@@ -1,6 +1,6 @@
 <?php
-require_once('classActualite.php');
-require_once('classSQL.php');
+require_once('../classes/classActualite.php');
+require_once('../classes/classSQL.php');
 SQL::connexionBDD();
 ?>
 <!doctype html>
@@ -24,30 +24,79 @@ SQL::connexionBDD();
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
         <main>
             <div class="conf-menu">
-                <h2>Ajouter :</h2>
-                <form action="confAjout">
-                    <label for="nom">Nom : </label>
-                    <input type="text" id="nom" name="nom" required>
-                    <label for="id">Id de catégorie associé : </label>
-                    <input type="number" id="id" name="id" required>
-                    <input type="submit" method="POST">
-                </form>
+            <?php
+            if (isset($_GET['actu'])) {
+                if($_GET['actu']==1){
+                    echo'<h2>Ajouter :</h2>
+                    <form action="confAjout">
+                        <input type="hidden" name="actu" value="1">
+                        <label for="titre">Titre : </label>
+                        <input type="text" id="titre" name="titre" required>
+
+                        <label for="bio">Bio : </label>
+                        <input type="text" id="bio" name="bio" required>
+
+                        <label for="blog">Blog : </label>
+                        <input type="text" id="blog" name="blog" required>
+
+                        <label for="date_publi">Date publi: </label>
+                        <input type="date" id="date_publi" name="date_publi" required>
+
+                        <label for="date_modif">Date modif: </label>
+                        <input type="date" id="date_modif" name="date_modif" required>
+
+                        <label for="auteur">Auteur : </label>
+                        <input type="number" id="auteur" name="auteur" required>
+
+                        <label for="tags">Tags : </label>
+                        <input type="text" id="tags" name="tags" required>
+
+                        <label for="sources">Sources : </label>
+                        <input type="text" id="sources" name="sources" required>
+
+                        <label for="img">Image : </label>
+                        <input type="text" id="img" name="img" required>
+
+                        <label for="alt_img">Alt Image : </label>
+                        <input type="text" id="alt_img" name="alt_img" required>
+
+                        <input type="submit" method="POST">
+                    </form>';
+                }}
+            if (isset($_GET['menu'])) {
+                if($_GET['menu']==1){
+                    echo'<h2>Ajouter :</h2>
+                    <form action="confAjout">
+                        <input type="hidden" name="menu" value="1">
+
+                        <label for="nom">Nom : </label>
+                        <input type="text" id="nom" name="nom" required>
+
+                        <label for="id">Id de catégorie associé : </label>
+                        <input type="number" id="id" name="id" required>
+                        
+                        <input type="submit" method="POST">
+                    </form>';
+                }}
+            ?>
+
+
             </div>
         </main>
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

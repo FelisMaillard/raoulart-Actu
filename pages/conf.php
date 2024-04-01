@@ -1,10 +1,24 @@
 <?php
-require_once('classActualite.php');
-require_once('classSQL.php');
-require_once('classMenu.php');
+require_once('../classes/classContact.php');
+require_once('../classes/classActualite.php');
+require_once('../classes/classSQL.php');
+require_once('../classes/classMenu.php');
 SQL::connexionBDD();
-$id = $_REQUEST['id'];
-Menu::supprMenu($id);
+if (isset($_GET['contact'])) {
+    if ($_GET['contact'] == 1) {
+        $mail = $_GET['mail'];
+        Contact::supprimerContact($mail);
+}}
+if (isset($_GET['menu'])) {
+    if ($_GET['menu'] == 1) {
+        $id = $_GET['id'];
+        Menu::supprMenu($id);
+    }}
+if (isset($_GET['actu'])) {
+    if ($_GET['actu'] == 1) {
+        $id = $_GET['id'];
+        Actualite::supprActu($id);
+    }}
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,24 +41,39 @@ Menu::supprMenu($id);
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
         <main>
             <div class="conf-menu">
-                <h2>Le menu a bien été supprimer</h2>
-                <a href="administration">Revenir</a>
+                <?php
+                if (isset($_GET['contact'])) {
+                    if ($_GET['contact'] == 1) {
+                        echo '<h2>Le contact à bien été supprimée</h2>
+                        <a href="administration?contact=1">Revenir</a>';
+                }}
+                if (isset($_GET['menu'])) {
+                    if ($_GET['menu'] == 1) {
+                        echo '<h2>Le menu à bien été supprimée</h2>
+                        <a href="administration?menu=1">Revenir</a>';
+                }}
+                if (isset($_GET['actu'])) {
+                    if ($_GET['actu'] == 1) {
+                        echo "<h2>L'actualité à bien été supprimée</h2>
+                        <a href='administration?actu=1'>Revenir</a>";
+                }}
+                ?>
             </div>
         </main>
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

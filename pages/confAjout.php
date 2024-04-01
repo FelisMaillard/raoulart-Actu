@@ -1,11 +1,28 @@
 <?php
-require_once('classActualite.php');
-require_once('classSQL.php');
-require_once('classMenu.php');
+require_once('../classes/classActualite.php');
+require_once('../classes/classSQL.php');
+require_once('../classes/classMenu.php');
 SQL::connexionBDD();
-$nom = $_REQUEST['nom'];
-$id = $_REQUEST['id'];
-Menu::ajoutMenu($nom, $id);
+if (isset($_REQUEST['actu'])) {
+    if ($_REQUEST['actu'] == 1) {
+        $titre = $_REQUEST['titre'];
+        $bio = $_REQUEST['bio'];
+        $blog = $_REQUEST['blog'];
+        $auteur = $_REQUEST['auteur'];
+        $date_publi = $_REQUEST['date_publi'];
+        $date_modif = $_REQUEST['date_modif'];
+        $tags = $_REQUEST['tags'];
+        $sources = $_REQUEST['sources'];
+        $img = $_REQUEST['img'];
+        $alt_img = $_REQUEST['alt_img'];
+        Actualite::ajoutActu($titre, $bio, $blog, $auteur, $date_publi, $date_modif, $tags, $sources, $img, $alt_img);
+    }}
+if (isset($_REQUEST['menu'])) {
+    if($_REQUEST['menu']==1){
+        $nom = $_REQUEST['nom'];
+        $categorie_id = $_REQUEST['id'];
+        Menu::ajoutMenu($nom, $categorie_id);
+    }}
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,24 +45,34 @@ Menu::ajoutMenu($nom, $id);
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
         <main>
             <div class="conf-menu">
-                <h2>Le menu a bien été Ajouter</h2>
-                <a href="administration">Revenir</a>
+                <?php
+                if (isset($_GET['menu'])) {
+                    if ($_GET['menu'] == 1) {
+                    echo'<h2>Le menu a bien été Ajouter</h2>
+                    <a href="administration?menu=1">Revenir</a>';
+                }}
+                if (isset($_GET['actu'])) {
+                    if ($_GET['actu'] == 1) {
+                    echo'<h2>Votre actualité a bien été Ajouter</h2>
+                    <a href="administration?actualite=1">Revenir</a>';
+                }}
+                ?>
             </div>
         </main>
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->

@@ -1,26 +1,16 @@
 <?php
-
-$host = '127.0.0.1';
-$db = 'raoulactu';
-$user = 'root';
-$pass = '';
-$port = 3306;
-$charset = 'utf8mb4' ;
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset;port=$port";
-$pdo = new PDO($dsn,$user,$pass);
-
-require_once('classContact.php');
+require_once('../classes/classContact.php');
+require_once('../classes/classSQL.php');
+SQL::connexionBDD();
 
 if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) {
     $prenom = htmlspecialchars($_POST['prenom']);
     $nom = htmlspecialchars($_POST['nom']);
     $mail = htmlspecialchars($_POST['mail']);
-    $contact = new Contact($nom, $prenom, $mail);
 
-    $contact->ajoutContact($contact,$pdo);
+    Contact::ajoutContact($prenom,$nom,$mail);
 
-    header('Location: index.php?ok=1');
+    header('Location: ../index.php?ok=1');
     exit();
 }
 ?>
@@ -45,13 +35,13 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
         <header>
             <?php
-            include("includes/header.php");
+            include("../includes/header.php");
             ?>
         </header>
 
@@ -78,7 +68,7 @@ if (isset($_POST['prenom']) and isset($_POST['nom']) and isset($_POST['mail'])) 
 
         <footer>
             <?php
-            include("includes/footer.php");
+            include("../includes/footer.php");
             ?>
         </footer>
         <!-- Bootstrap JavaScript Libraries -->
